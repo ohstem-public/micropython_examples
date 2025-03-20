@@ -12,4 +12,4 @@ else:
   print('i2c devices found:',len(devices))
 
   for device in devices:  
-    print("Decimal address: ",device," | Hexa address: ",hex(device))
+    print("Decimal address: ", device, " | Hexa address: ", hex(device))
