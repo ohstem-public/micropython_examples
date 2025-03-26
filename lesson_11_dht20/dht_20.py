@@ -1,11 +1,13 @@
 from machine import SoftI2C, Pin
-from setting import *
 from time import sleep_ms
 import asyncio
 
 class DHT20(object):
     def __init__(self, i2c=None):
-        self.i2c = SoftI2C(scl=Pin(SCL_PIN), sda=Pin(SDA_PIN))
+        if i2c == None:
+            self.i2c = SoftI2C(scl=Pin(SCL_PIN), sda=Pin(SDA_PIN))
+        else:
+            self.i2c = i2c
 
         if (self.read_status() & 0x80) == 0x80:
             self.init()  
