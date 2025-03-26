@@ -14,9 +14,9 @@ dht_sensor = DHT20(i2c)
 
 led = Pin(48, Pin.OUT)
 
-SSID = 'test'
-PASSWORD = '12345678'
-TOKEN = '898napce6v5pnchnvzu8'
+SSID = 'WIFI_NAME'
+PASSWORD = 'WIFI_PASSWORD'
+TOKEN = 'YOUR_DEVICE_TOKEN'
 
 ci_client = CIDeviceMqttClient(SSID, PASSWORD, TOKEN)
 
@@ -27,9 +27,6 @@ async def on_rpc_setLedState(request_id, request_body):
     led.off()
   await ci_client.send_rpc_reply(request_id, {'success': 1})
 
-async def setup():
-  await ci_client.connect()
-  ci_client.set_rpc_request_handler('setLedState', on_rpc_setLedState)
 
 async def task1(): # send telemetry to core iot
   while True:
@@ -52,8 +49,20 @@ async def task2(): # print to LCD
     lcd.putstr('Do am:    ' + str(dht_sensor.humidity()) + '%')
     await asleep_ms(5000)
 
-loop = asyncio.get_event_loop()
-loop.create_task(setup())
-loop.create_task(task1())
-loop.create_task(task2())
-loop.run_forever()
+
+async def main():
+  await ci_client.connect()
+  ci_client.set_rpc_request_handler('setLedState', on_rpc_setLedState)
+  asyncio.create_task(task1())
+  asyncio.create_task(task2())
+
+  while True:
+    await asyncio.sleep_ms(100)
+
+try:
+    asyncio.run(main())
+except KeyboardInterrupt:
+    print('Code stopped')
+finally:
+    ci_client.close()
+    asyncio.new_event_loop()
