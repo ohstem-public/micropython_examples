@@ -3,7 +3,7 @@
 import time
 from machine import Pin
 
-led = Pin(48, Pin.OUT)
+led = Pin(48, Pin.OUT) # change to 8 if using Yolo Node
 
 while True:
     led.on()

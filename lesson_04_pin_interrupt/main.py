@@ -2,8 +2,8 @@
 
 from machine import Pin
 
-button = Pin(0, Pin.IN, Pin.PULL_UP)
-led = Pin(48, Pin.OUT)
+button = Pin(0, Pin.IN, Pin.PULL_UP) # change to 9 if using Yolo Node
+led = Pin(48, Pin.OUT) # change to 9 if using Yolo Node
 
 led_state = 1
 

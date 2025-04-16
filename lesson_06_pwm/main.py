@@ -3,7 +3,7 @@
 import time
 from machine import Pin, PWM, ADC
 
-led_pwm = PWM(Pin(48), freq=1000, duty=0)
+led_pwm = PWM(Pin(48), freq=1000, duty=0) # change to 8 if using Yolo Node
 
 adc_input = ADC(Pin(1))  # create ADC instance on GPIO1
 adc_input.atten(ADC.ATTN_11DB) # ADC range max input 3.3V

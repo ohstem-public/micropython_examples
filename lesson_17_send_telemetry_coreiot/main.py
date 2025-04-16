@@ -4,17 +4,17 @@ from ci_device_mqtt import *
 from dht_20 import DHT20
 from lcd_1602 import LCD1602
 
-SCL_PIN = 12
-SDA_PIN = 11
+SCL_PIN = 6
+SDA_PIN = 5
 
 i2c = SoftI2C(scl=Pin(SCL_PIN), sda=Pin(SDA_PIN), freq=100000)
 
 lcd = LCD1602(i2c, addr=0x21)
 dht_sensor = DHT20(i2c)
 
-SSID = 'WIFI_NAME'
-PASSWORD = 'WIFI_PASSWORD'
-TOKEN = 'YOUR_DEVICE_TOKEN'
+SSID = 'Sandiego2'
+PASSWORD = '0988807067'
+TOKEN = 'ls08rk52xm7umejxebn7'
 
 ci_client = CIDeviceMqttClient(SSID, PASSWORD, TOKEN, 'app.coreiot.io', 1883)
 
